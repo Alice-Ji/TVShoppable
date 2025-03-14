@@ -3,109 +3,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TV Show Study</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/icon.css" />
   <script src="js/script.js" defer></script>
+  <style>
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #adVideo {
+      visibility: hidden; /* Instead of display: none */
+    }
+  </style>
 </head>
 
 <body>
   <div class="video-container">
-    <!-- Main Video (TV Show) using iframe -->
-    <iframe
-      allow="fullscreen"
-      allowfullscreen
-      height="720"
-      src="https://streamable.com/e/061nvr?loop=0&nocontrols=1"
-      width="1280"
-      style="border: none"
-    ></iframe>
-
-    <!-- Ad Video (Hidden Initially) using iframe -->
-    <iframe
-      allow="fullscreen"
-      allowfullscreen
-      height="720"
-      src="https://streamable.com/e/iwjqy0?loop=0&nocontrols=1"
-      width="1280"
-      style="border: none; display: none"
-      id="adVideo"
-    ></iframe>
-
-    <!-- Video Controls -->
-    <div class="video-controls">
-      <div class="controls-main">
-        <div class="top-controls">
-          <div class="top-right-controls">
-            <button class="icon subtitles"></button>
-            <button class="icon setting"></button>
-            <div class="volume-control">
-              <button class="volume-btn">
-                <span class="icon sound"></span>
-              </button>
-              <div class="volume-slider">
-                <input type="range" min="0" max="100" value="100" />
-              </div>
-            </div>
-            <button class="icon open-in-full"></button>
-            <button class="icon close"></button>
-          </div>
-        </div>
-
-        <div class="center-controls">
-          <button class="replay-10"><span class="icon replay"></span></button>
-          <button class="play-pause"><span class="icon play"></span></button>
-          <button class="forward-10"><span class="icon forward"></span></button>
-        </div>
-
-        <div class="bottom-controls">
-          <div class="progress-container">
-            <div class="progress-bar">
-              <div class="progress"></div>
-            </div>
-            <div class="time-tooltip">00:00</div>
-          </div>
-          <div class="bottom-row">
-            <div class="time-display">
-              <span class="current-time">0:00</span
-              ><span class="separator">/</span>
-              <span class="duration">20:00</span>
-            </div>
-            <button class="next-episode">
-              Next Episode <span class="icon right-arrow"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Interactive Ad Overlay -->
-    <div id="adOverlay" class="hidden">
-      <img
-        src="https://raw.githubusercontent.com/Alice-Ji/TVShoppable/refs/heads/main/overlay-ipadmini.jpg"
-        alt="Interactive Ad"
+    <video id="mainVideo" controls>
+      <source
+        src="https://www.dropbox.com/scl/fi/cvwxu0csd7wunwi55luw6/modern-family-ipad-episode-short.mp4?rlkey=61v58jeo10vsrdnscoqeor6fp&st=f0zsbqz3&raw=1"
+        type="video/mp4"
       />
-      <div class="interaction-icons">
-        <img
-          src="https://raw.githubusercontent.com/Alice-Ji/TVShoppable/refs/heads/main/pressdown.png"
-          class="press-button"
-          id="pressDown"
-        />
-        <img
-          src="https://raw.githubusercontent.com/Alice-Ji/TVShoppable/refs/heads/main/pressok.png"
-          class="press-button"
-          id="pressOk"
-        />
-        <img
-          src="https://raw.githubusercontent.com/Alice-Ji/TVShoppable/refs/heads/main/pressup.png"
-          class="press-button"
-          id="pressUp"
-        />
-      </div>
-    </div>
+    </video>
 
-    <!-- Video Info -->
-    <div class="video-info">
-      <h1>Modern Family</h1>
-      <h2>S1 E19</h2>
-    </div>
+    <video id="adVideo" controls>
+      <source
+        src="https://www.dropbox.com/scl/fi/mdev6lxfqpkmaj8erawt0/ad-ipadmini.mp4?rlkey=63a7u9ale243tosfq5d3fs9ms&st=45465lk8&raw=1"
+        type="video/mp4"
+      />
+    </video>
   </div>
 </body>
