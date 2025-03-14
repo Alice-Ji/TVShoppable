@@ -9,23 +9,26 @@
 
 <body>
   <div class="video-container">
-    <!-- Main Video (TV Show) -->
-    <video id="mainVideo">
-      <source
-        src="https://drive.google.com/uc?export=download&id=1YhT36nEmXkyPrv4tg6DIP-70Kt6eCwIx"
-        type="video/mp4"
-      />
-      Your browser does not support the video tag.
-    </video>
+    <!-- Main Video (TV Show) using iframe -->
+    <iframe
+      allow="fullscreen"
+      allowfullscreen
+      height="720"
+      src="https://streamable.com/e/061nvr?loop=0&nocontrols=1"
+      width="1280"
+      style="border: none"
+    ></iframe>
 
-    <!-- Ad Video (Hidden Initially) -->
-    <video id="adVideo" class="hidden">
-      <source
-        src="https://drive.google.com/uc?export=download&id=18AVyiOqSSZK3NxCj4alUcKxzTPf692sg"
-        type="video/mp4"
-      />
-      Your browser does not support the video tag.
-    </video>
+    <!-- Ad Video (Hidden Initially) using iframe -->
+    <iframe
+      allow="fullscreen"
+      allowfullscreen
+      height="720"
+      src="https://streamable.com/e/iwjqy0?loop=0&nocontrols=1"
+      width="1280"
+      style="border: none; display: none"
+      id="adVideo"
+    ></iframe>
 
     <!-- Video Controls -->
     <div class="video-controls">
