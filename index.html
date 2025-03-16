@@ -1,0 +1,65 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Show Study</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/icon.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <div class="video-container">
+      <video id="mainVideo">
+          <source src="https://www.dl.dropboxusercontent.com/scl/fi/cvwxu0csd7wunwi55luw6/modern-family-ipad-episode-short.mp4?rlkey=61v58jeo10vsrdnscoqeor6fp" type="video/mp4">
+      </video>
+
+      <div class="video-controls">
+          <div class="controls-main">
+              <div class="top-controls">
+                  <div class="top-right-controls">
+                      <button class="icon subtitles"></button>
+                      <button class="icon setting"></button>
+                      <div class="volume-control">
+                          <button class="volume-btn">
+                              <span class="icon sound"></span>
+                          </button>
+                          <div class="volume-slider">
+                              <input type="range" min="0" max="100" value="100">
+                          </div>
+                      </div>
+                      <button class="icon open-in-full"></button>
+                      <button class="icon close"></button>
+                  </div>
+              </div>
+
+              <div class="center-controls">
+                  <button class="replay-10"><span class="icon replay"></span></button>
+                  <button class="play-pause"><span class="icon play"></span></button>
+                  <button class="forward-10"><span class="icon forward"></span></button>
+              </div>
+
+              <div class="bottom-controls">
+                  <div class="progress-container">
+                      <div class="progress-bar">
+                          <div class="progress"></div>
+                      </div>
+                      <div class="time-tooltip">00:00</div>
+                  </div>
+                  <div class="bottom-row">
+                      <div class="time-display">
+                          <span class="current-time">0:00</span><span class="separator">/</span>
+                          <span class="duration">20:00</span>
+                      </div>
+                      <button class="next-episode">Next Episode <span class="icon right-arrow"></span></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="video-info">
+          <h1>Modern Family</h1>
+          <h2>S1 E19</h2>
+      </div>
+  </div>
+
+
+  </div>
