@@ -171,11 +171,15 @@ class VideoPlayer {
 
     // shop now button talks to qualtrics
     this.shopNowButton.addEventListener("click", () => {
-      console.log("🛒 Shop Now clicked!");
+  console.log("🛒 Shop Now clicked!");
 
-      // Send message to parent (Qualtrics)
-      window.parent.postMessage({ shopNowClicked: true }, "*");
-    });
+  // Check if Qualtrics is defined before calling it
+  if (typeof Qualtrics !== "undefined" && Qualtrics.SurveyEngine) {
+    Qualtrics.SurveyEngine.setEmbeddedData("shopClicked", "yes");
+  } else {
+    console.warn("Qualtrics not available—running outside of Qualtrics?");
+  }
+});
 
     // Append to ad interaction area
     this.adInteraction.appendChild(this.shopNowButton);
