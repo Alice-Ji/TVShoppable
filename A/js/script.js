@@ -477,6 +477,13 @@ class VideoPlayer {
     this.mainVideo.addEventListener("loadedmetadata", () =>
       this.updateDuration()
     );
+	  this.mainVideo.addEventListener("ended", () => {
+  console.log("📺 Main video ended");
+  if (window.parent && window.parent.postMessage) {
+    window.parent.postMessage({ videoCompleted: true }, "*");
+  }
+});
+
   }
 
   // 键盘控制事件
