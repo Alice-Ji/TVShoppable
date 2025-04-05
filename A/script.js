@@ -172,8 +172,10 @@ class VideoPlayer {
     // shop now button talks to qualtrics
     this.shopNowButton.addEventListener("click", () => {
       console.log("🛒 Shop Now clicked!");
-      Qualtrics.SurveyEngine.setEmbeddedData("shop_now_clicked", "1");
-    });
+    // Send message to parent (Qualtrics)
+    window.parent.postMessage({ shopNowClicked: true }, "*");
+  });
+
 
     // Append to ad interaction area
     this.adInteraction.appendChild(this.shopNowButton);
