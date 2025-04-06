@@ -12,7 +12,7 @@ class VideoPlayer {
       {
         time: 153, // 2:33
         ads: [
-          "https://dl.dropboxusercontent.com/scl/fi/3dhtg097mqr2c3y0vn41k/ad-factor-tv1.mp4?rlkey=wmwn24ib6osm777je5xxjgw5v",
+          "https://dl.dropboxusercontent.com/scl/fi/bwfot7tuei8az7wpyv9ek/ad-factor-tv2-shoppable.mp4?rlkey=pbk0edne4fgsat57wh5l8eqng          ",
         ],
       },
       {
@@ -384,7 +384,7 @@ class VideoPlayer {
     const currentAdUrl = currentBreak.ads[this.currentAd];
     this.adVideo.src = currentAdUrl;
 
-    const isFactorAd = currentAdUrl.includes("ad-factor-tv1.mp4");
+    const isFactorAd = currentAdUrl.includes("ad-factor");
     const isIpadAd = currentAdUrl.includes("ad-ipadmini.mp4");
     const isClothesAd = currentAdUrl.includes("ad-clothes.mp4");
     const isSecondBreak = this.currentAdBreak === 0;
@@ -469,24 +469,23 @@ class VideoPlayer {
   }
 
   // 时间更新相关事件
-setupTimeUpdates() {
-  this.mainVideo.addEventListener("timeupdate", () => {
-    this.updateProgress();
-    this.checkForAds();
-  });
+  setupTimeUpdates() {
+    this.mainVideo.addEventListener("timeupdate", () => {
+      this.updateProgress();
+      this.checkForAds();
+    });
 
-  this.mainVideo.addEventListener("loadedmetadata", () =>
-    this.updateDuration()
-  );
+    this.mainVideo.addEventListener("loadedmetadata", () =>
+      this.updateDuration()
+    );
 
-  this.mainVideo.addEventListener("ended", () => {
-    console.log("📺 Main video ended");
-    if (window.parent && window.parent.postMessage) {
-      window.parent.postMessage({ videoCompleted: true }, "*");
-    }
-  });
-}
-
+    this.mainVideo.addEventListener("ended", () => {
+      console.log("📺 Main video ended");
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ videoCompleted: true }, "*");
+      }
+    });
+  }
 
   // 键盘控制事件
   setupKeyboardControls() {
