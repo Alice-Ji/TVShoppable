@@ -175,9 +175,22 @@ class VideoPlayer {
     this.shopNowButton.textContent = "Shop Now!";
     this.shopNowButton.style.display = "none";
 
+    // Create shop the look button
+    this.shopClothesButton = document.createElement("button");
+    this.shopClothesButton.className = "shop-now-btn clothes";
+    this.shopClothesButton.textContent = "Shop the Look!";
+    this.shopClothesButton.style.display = "none";
+
     // shop now button talks to qualtrics
     this.shopNowButton.addEventListener("click", () => {
-  console.log("🛒 Shop Now clicked!");
+    console.log("🛒 Shop Now clicked!");
+
+    // shop the look button Qualtrics messaging
+    this.shopClothesButton.addEventListener("click", () => {
+    console.log("🧥 Shop the Look clicked!");
+     window.parent.postMessage({ shopNowClicked: true, adType: "clothes" }, "*");
+});
+
 
   // Identify which ad is playing
   const currentAdUrl = this.adBreaks[this.currentAdBreak]?.ads[this.currentAd] || "";
@@ -194,7 +207,7 @@ class VideoPlayer {
 
     // Append to ad interaction area
     this.adInteraction.appendChild(this.shopNowButton);
-
+    this.adInteraction.appendChild(this.shopClothesButton);
     this.adContainer.appendChild(this.adVideo);
     this.adContainer.appendChild(this.adDetailInteraction);
     this.adContainer.appendChild(this.adInteraction);
@@ -413,14 +426,16 @@ class VideoPlayer {
     this.adInteraction.appendChild(this.shopNowButton);
 
     // Toggle display
-    this.shopNowButton.style.display = (isFactorAd) ? "block" : "none";
-    this.adInteraction.style.display =
-      isFactorAd || isClothesAd || (isIpadAd && isSecondBreak)
-        ? "flex"
-        : "none";
+    // Hide both first
+    this.shopNowButton.style.display = "none";
+    this.shopClothesButton.style.display = "none";
 
-    this.adVideo.play();
-  }
+      // Show relevant one
+      if (isFactorAd) {
+      this.shopNowButton.style.display = "block";}
+      if (isClothesAd) {
+      this.shopClothesButton.style.display = "block";}
+
 
   // 处理广告结束
   handleAdEnded() {
