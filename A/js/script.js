@@ -26,7 +26,7 @@ class VideoPlayer {
         ads: [
           "https://dl.dropboxusercontent.com/scl/fi/dhcizjh1szr9qq61voika/ad-clothes-tv-shoppable.mp4?rlkey=ce2v3a1e274r06kp5d3eyaftv",
         ],
-      },	    
+      },
     ];
 
     this.currentAdBreak = 0;
@@ -175,16 +175,27 @@ class VideoPlayer {
     this.shopNowButton.textContent = "Shop Now!";
     this.shopNowButton.style.display = "none";
 
+    // Create Shop the Look button
+    this.shopLookButton = document.createElement("button");
+    this.shopLookButton.className = "shop-look-btn";
+    this.shopLookButton.textContent = "Shop the Look!";
+    this.shopLookButton.style.display = "none";
+
     // shop now button talks to qualtrics
     this.shopNowButton.addEventListener("click", () => {
       console.log("🛒 Shop Now clicked!");
-
-      // Send message to parent (Qualtrics)
       window.parent.postMessage({ shopNowClicked: true }, "*");
+    });
+
+    // shop look button talks to qualtrics
+    this.shopLookButton.addEventListener("click", () => {
+      console.log("👗 Shop the Look clicked!");
+      window.parent.postMessage({ shopLookClicked: true }, "*");
     });
 
     // Append to ad interaction area
     this.adInteraction.appendChild(this.shopNowButton);
+    this.adInteraction.appendChild(this.shopLookButton);
 
     this.adContainer.appendChild(this.adVideo);
     this.adContainer.appendChild(this.adDetailInteraction);
@@ -228,6 +239,9 @@ class VideoPlayer {
     this.adInteraction.innerHTML = isClothesAd
       ? this.clothesDetailInteractionContent
       : this.detailInteractionContent;
+
+    this.adInteraction.appendChild(this.shopNowButton);
+    this.adInteraction.appendChild(this.shopLookButton);
 
     // 设置初始图片
     const detailImage = this.adDetailInteraction.querySelector(".detail-image");
@@ -360,6 +374,9 @@ class VideoPlayer {
       ? this.clothesDefaultInteractionContent
       : this.defaultInteractionContent;
 
+    this.adInteraction.appendChild(this.shopNowButton);
+    this.adInteraction.appendChild(this.shopLookButton);
+
     this.adVideo.play();
   }
 
@@ -393,6 +410,7 @@ class VideoPlayer {
     const isFactorAd = currentAdUrl.includes("ad-factor");
     const isIpadAd = currentAdUrl.includes("ad-ipadmini.mp4");
     const isClothesAd = currentAdUrl.includes("ad-clothes.mp4");
+    const isClothesAdShort = currentAdUrl.includes("ad-clothes");
     const isSecondBreak = this.currentAdBreak === 0;
 
     // Reset interaction container first
@@ -402,11 +420,13 @@ class VideoPlayer {
 
     // Append Shop Now button AFTER setting innerHTML
     this.adInteraction.appendChild(this.shopNowButton);
+    this.adInteraction.appendChild(this.shopLookButton);
 
     // Toggle display
     this.shopNowButton.style.display = isFactorAd ? "block" : "none";
+    this.shopLookButton.style.display = isClothesAdShort ? "block" : "none";
     this.adInteraction.style.display =
-      isFactorAd || isClothesAd || (isIpadAd && isSecondBreak)
+      isFactorAd || isClothesAdShort || (isIpadAd && isSecondBreak)
         ? "flex"
         : "none";
 
