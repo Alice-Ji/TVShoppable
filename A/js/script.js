@@ -12,7 +12,7 @@ class VideoPlayer {
       {
         time: 153, // 2:33
         ads: [
-          "https://dl.dropboxusercontent.com/scl/fi/bwfot7tuei8az7wpyv9ek/ad-factor-tv2-shoppable.mp4?rlkey=pbk0edne4fgsat57wh5l8eqng",
+          "https://dl.dropboxusercontent.com/scl/fi/bwfot7tuei8az7wpyv9ek/ad-factor-tv2-shoppable.mp4?rlkey=pbk0edne4fgsat57wh5l8eqng          ",
         ],
       },
       {
@@ -175,39 +175,17 @@ class VideoPlayer {
     this.shopNowButton.textContent = "Shop Now!";
     this.shopNowButton.style.display = "none";
 
-    // Create shop the look button
-    this.shopClothesButton = document.createElement("button");
-    this.shopClothesButton.className = "shop-now-btn clothes";
-    this.shopClothesButton.textContent = "Shop the Look!";
-    this.shopClothesButton.style.display = "none";
-
     // shop now button talks to qualtrics
     this.shopNowButton.addEventListener("click", () => {
-    console.log("🛒 Shop Now clicked!");
+      console.log("🛒 Shop Now clicked!");
 
-    // shop the look button Qualtrics messaging
-    this.shopClothesButton.addEventListener("click", () => {
-    console.log("🧥 Shop the Look clicked!");
-     window.parent.postMessage({ shopNowClicked: true, adType: "clothes" }, "*");
-});
-
-
-  // Identify which ad is playing
-  const currentAdUrl = this.adBreaks[this.currentAdBreak]?.ads[this.currentAd] || "";
-  const isFactorAd = currentAdUrl.includes("ad-factor");
-  const isClothesAd = currentAdUrl.includes("ad-clothes");
-
-  let clickedAdType = "unknown";
-  if (isFactorAd) clickedAdType = "factor";
-  if (isClothesAd) clickedAdType = "clothes";
-
-  // Send message to Qualtrics with ad type
-  window.parent.postMessage({ shopNowClicked: true, adType: clickedAdType }, "*");
-});
+      // Send message to parent (Qualtrics)
+      window.parent.postMessage({ shopNowClicked: true }, "*");
+    });
 
     // Append to ad interaction area
     this.adInteraction.appendChild(this.shopNowButton);
-    this.adInteraction.appendChild(this.shopClothesButton);
+
     this.adContainer.appendChild(this.adVideo);
     this.adContainer.appendChild(this.adDetailInteraction);
     this.adContainer.appendChild(this.adInteraction);
@@ -228,7 +206,7 @@ class VideoPlayer {
           );
         const isClothesAd =
           this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-            "ad-clothes"
+            "ad-clothes.mp4"
           );
 
         if (isClothesAd || (isIpadAd && isSecondBreak)) {
@@ -244,7 +222,7 @@ class VideoPlayer {
     this.adDetailInteraction.style.display = "block";
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes"
+        "ad-clothes.mp4"
       );
     // 根据广告类型设置不同的交互内容
     this.adInteraction.innerHTML = isClothesAd
@@ -314,7 +292,7 @@ class VideoPlayer {
     const cartHint = this.adDetailInteraction.querySelector(".cart-hint");
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes"
+        "ad-clothes.mp4"
       );
 
     if (isClothesAd) {
@@ -355,7 +333,7 @@ class VideoPlayer {
   addToCart() {
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes"
+        "ad-clothes.mp4"
       );
     const cartHint = this.adDetailInteraction.querySelector(".cart-hint");
 
@@ -375,7 +353,7 @@ class VideoPlayer {
     this.adDetailInteraction.style.display = "none";
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes"
+        "ad-clothes.mp4"
       );
     // 根据广告类型设置不同的交互内容
     this.adInteraction.innerHTML = isClothesAd
@@ -414,7 +392,7 @@ class VideoPlayer {
 
     const isFactorAd = currentAdUrl.includes("ad-factor");
     const isIpadAd = currentAdUrl.includes("ad-ipadmini.mp4");
-    const isClothesAd = currentAdUrl.includes("ad-clothes");
+    const isClothesAd = currentAdUrl.includes("ad-clothes.mp4");
     const isSecondBreak = this.currentAdBreak === 0;
 
     // Reset interaction container first
@@ -426,16 +404,14 @@ class VideoPlayer {
     this.adInteraction.appendChild(this.shopNowButton);
 
     // Toggle display
-    // Hide both first
-    this.shopNowButton.style.display = "none";
-    this.shopClothesButton.style.display = "none";
+    this.shopNowButton.style.display = isFactorAd ? "block" : "none";
+    this.adInteraction.style.display =
+      isFactorAd || isClothesAd || (isIpadAd && isSecondBreak)
+        ? "flex"
+        : "none";
 
-      // Show relevant one
-      if (isFactorAd) {
-      this.shopNowButton.style.display = "block";}
-      if (isClothesAd) {
-      this.shopClothesButton.style.display = "block";}
-
+    this.adVideo.play();
+  }
 
   // 处理广告结束
   handleAdEnded() {
@@ -598,7 +574,7 @@ class VideoPlayer {
       const isSecondBreak = this.currentAdBreak === 0;
       const isClothesAd =
         this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-          "ad-clothes"
+          "ad-clothes.mp4"
         );
 
       if ((isIpadAd && isSecondBreak) || isClothesAd) {
