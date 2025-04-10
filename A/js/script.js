@@ -413,7 +413,7 @@ class VideoPlayer {
     this.adInteraction.appendChild(this.shopNowButton);
 
     // Toggle display
-    this.shopNowButton.style.display = isFactorAd ? "block" : "none";
+    this.shopNowButton.style.display = (isFactorAd || isClothesAd) ? "block" : "none";
     this.adInteraction.style.display =
       isFactorAd || isClothesAd || (isIpadAd && isSecondBreak)
         ? "flex"
