@@ -21,6 +21,12 @@ class VideoPlayer {
           "https://dl.dropboxusercontent.com/scl/fi/d6ir9c7pjwlrpba8olfed/ad-ultima-tv1.mp4?rlkey=ytyx27finuyb722b2ufbx4ulm",
         ],
       },
+      {
+        time: 372, // 6:12
+        ads: [
+          "https://dl.dropboxusercontent.com/scl/fi/dhcizjh1szr9qq61voika/ad-clothes-tv-shoppable.mp4?rlkey=ce2v3a1e274r06kp5d3eyaftv",
+        ],
+      },	    
     ];
 
     this.currentAdBreak = 0;
