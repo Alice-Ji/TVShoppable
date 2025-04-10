@@ -215,7 +215,7 @@ class VideoPlayer {
           );
         const isClothesAd =
           this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-            "ad-clothes.mp4"
+            "ad-clothes"
           );
 
         if (isClothesAd || (isIpadAd && isSecondBreak)) {
@@ -231,7 +231,7 @@ class VideoPlayer {
     this.adDetailInteraction.style.display = "block";
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes.mp4"
+        "ad-clothes"
       );
     // 根据广告类型设置不同的交互内容
     this.adInteraction.innerHTML = isClothesAd
@@ -301,7 +301,7 @@ class VideoPlayer {
     const cartHint = this.adDetailInteraction.querySelector(".cart-hint");
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes.mp4"
+        "ad-clothes"
       );
 
     if (isClothesAd) {
@@ -342,7 +342,7 @@ class VideoPlayer {
   addToCart() {
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes.mp4"
+        "ad-clothes"
       );
     const cartHint = this.adDetailInteraction.querySelector(".cart-hint");
 
@@ -362,7 +362,7 @@ class VideoPlayer {
     this.adDetailInteraction.style.display = "none";
     const isClothesAd =
       this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-        "ad-clothes.mp4"
+        "ad-clothes"
       );
     // 根据广告类型设置不同的交互内容
     this.adInteraction.innerHTML = isClothesAd
@@ -401,7 +401,7 @@ class VideoPlayer {
 
     const isFactorAd = currentAdUrl.includes("ad-factor");
     const isIpadAd = currentAdUrl.includes("ad-ipadmini.mp4");
-    const isClothesAd = currentAdUrl.includes("ad-clothes.mp4");
+    const isClothesAd = currentAdUrl.includes("ad-clothes");
     const isSecondBreak = this.currentAdBreak === 0;
 
     // Reset interaction container first
@@ -583,7 +583,7 @@ class VideoPlayer {
       const isSecondBreak = this.currentAdBreak === 0;
       const isClothesAd =
         this.adBreaks[this.currentAdBreak]?.ads[this.currentAd].includes(
-          "ad-clothes.mp4"
+          "ad-clothes"
         );
 
       if ((isIpadAd && isSecondBreak) || isClothesAd) {
