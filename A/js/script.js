@@ -177,11 +177,20 @@ class VideoPlayer {
 
     // shop now button talks to qualtrics
     this.shopNowButton.addEventListener("click", () => {
-      console.log("🛒 Shop Now clicked!");
+  console.log("🛒 Shop Now clicked!");
 
-      // Send message to parent (Qualtrics)
-      window.parent.postMessage({ shopNowClicked: true }, "*");
-    });
+  // Identify which ad is playing
+  const currentAdUrl = this.adBreaks[this.currentAdBreak]?.ads[this.currentAd] || "";
+  const isFactorAd = currentAdUrl.includes("ad-factor");
+  const isClothesAd = currentAdUrl.includes("ad-clothes");
+
+  let clickedAdType = "unknown";
+  if (isFactorAd) clickedAdType = "factor";
+  if (isClothesAd) clickedAdType = "clothes";
+
+  // Send message to Qualtrics with ad type
+  window.parent.postMessage({ shopNowClicked: true, adType: clickedAdType }, "*");
+});
 
     // Append to ad interaction area
     this.adInteraction.appendChild(this.shopNowButton);
